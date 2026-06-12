@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacer Bien — Leadership Coaching & Continuous Improvement</title>
+  <meta name="description" content="Hacer Bien partners with leaders to build coherent systems that produce strong outcomes for students, staff, families, and communities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep: #0E6B35;
+      --mid: #4A8E22;
+      --bright: #59A52C;
+      --light: #6FCA3A;
+      --gold: #C9A24B;
+      --gold-soft: #D9BC74;
+      --bg: #FAFAF7;
+      --bg-green: #f0f7eb;
+      --text: #1A1A1A;
+      --text-light: #555;
+      --white: #FFFFFF;
+      --display: 'Playfair Display', Georgia, serif;
+      --body: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,250,247,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(14,107,53,0.08);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px;
+    }
+    .nav-logo { height: 28px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--text);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bright); }
+    .nav-cta {
+      background: var(--deep); color: var(--white) !important;
+      padding: 8px 20px; border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--mid) !important; }
+    .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(170deg, var(--deep) 0%, #0a5a2c 40%, #073d1e 100%);
+      position: relative; overflow: hidden;
+      padding: 120px 32px 80px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,162,75,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(111,202,58,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-content {
+      max-width: 800px; text-align: center;
+      position: relative; z-index: 1;
+    }
+    .hero-flower {
+      width: 56px; height: 56px; margin-bottom: 32px;
+      opacity: 0.85;
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.2; margin-bottom: 24px;
+    }
+    .hero-where {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--gold-soft);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.8);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 600px; margin: 0 auto 40px;
+    }
+    .hero-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white); font-weight: 600;
+      padding: 14px 36px; border-radius: 6px;
+      text-decoration: none; font-size: 15px;
+      letter-spacing: 0.03em;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .hero-btn:hover { background: var(--gold-soft); transform: translateY(-1px); }
+
+    /* ---- SECTIONS ---- */
+    section { padding: 100px 32px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--bright);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; color: var(--deep);
+      line-height: 1.25; margin-bottom: 20px;
+    }
+    .section-intro {
+      font-size: 17px; color: var(--text-light);
+      max-width: 640px; line-height: 1.8;
+    }
+
+    /* ---- BELIEF ---- */
+    .belief { background: var(--bg-green); }
+    .belief-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .belief-quote {
+      font-family: var(--display);
+      font-size: 22px; font-weight: 500;
+      color: var(--deep);
+      line-height: 1.6;
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+    }
+    .belief-text p {
+      font-size: 16px; color: var(--text-light);
+      margin-bottom: 16px; line-height: 1.8;
+    }
+
+    /* ---- SERVICES ---- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid rgba(14,107,53,0.08);
+      border-radius: 10px;
+      padding: 36px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(14,107,53,0.08);
+    }
+    .service-icon {
+      width: 40px; height: 40px;
+      background: var(--bg-green);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      color: var(--deep);
+      font-size: 18px;
+    }
+    .service-card h3 {
+      font-family: var(--display);
+      font-size: 20px; font-weight: 700;
+      color: var(--deep);
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      font-size: 15px; color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ---- APPROACH / PDSA ---- */
+    .approach { background: var(--deep); color: var(--white); }
+    .approach .section-label { color: var(--gold-soft); }
+    .approach .section-title { color: var(--white); }
+    .approach .section-intro { color: rgba(255,255,255,0.7); }
+    .pdsa-cycle {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .pdsa-step {
+      text-align: center;
+      padding: 32px 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .pdsa-step-num {
+      font-family: var(--display);
+      font-size: 48px; font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+    .pdsa-step h3 {
+      font-family: var(--display);
+      font-size: 22px; font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pdsa-step p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+    .pdsa-arrow {
+      position: absolute;
+      right: -18px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      font-size: 20px;
+      z-index: 2;
+    }
+
+    /* ---- OUTCOMES ---- */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .outcome-card {
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .outcome-num {
+      font-family: var(--display);
+      font-size: 14px; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .outcome-card h3 {
+      font-family: var(--display);
+      font-size: 18px; font-weight: 700;
+      color: var(--deep);
+      margin-bottom: 10px;
+    }
+    .outcome-card p {
+      font-size: 14px; color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ---- CONTACT ---- */
+    .contact {
+      background: var(--bg-green);
+      text-align: center;
+    }
+    .contact .section-intro { margin: 0 auto 36px; }
+    .contact-btn {
+      display: inline-block;
+      background: var(--deep);
+      color: var(--white); font-weight: 600;
+      padding: 16px 40px; border-radius: 6px;
+      text-decoration: none; font-size: 16px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-btn:hover { background: var(--mid); transform: translateY(-1px); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #062E16;
+      color: rgba(255,255,255,0.5);
+      padding: 40px 32px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer a { color: var(--gold-soft); text-decoration: none; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .belief-grid { grid-template-columns: 1fr; gap: 32px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pdsa-cycle { grid-template-columns: repeat(2, 1fr); }
+      .pdsa-arrow { display: none; }
+      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 60px; left: 0; right: 0;
+        background: var(--bg);
+        padding: 24px 32px; gap: 16px;
+        border-bottom: 1px solid rgba(14,107,53,0.1);
+      }
+      section { padding: 64px 20px; }
+      .pdsa-cycle { grid-template-columns: 1fr; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .service-card:hover, .hero-btn:hover, .contact-btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <svg class="nav-logo" viewBox="0 0 200 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="28" font-family="'Inter', sans-serif" font-weight="800" font-size="28" letter-spacing="0.06em">
+        <tspan fill="#0E6B35">HACER</tspan><tspan fill="#59A52C"> BIEN</tspan>
+      </text>
+    </svg>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E6B35" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#belief">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#outcomes">Outcomes</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <!-- Gold flower icon -->
+    <svg class="hero-flower" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(28,28)">
+        <ellipse rx="5" ry="14" fill="#C9A24B" opacity="0.9" transform="rotate(0)"/>
+        <ellipse rx="5" ry="14" fill="#C9A24B" opacity="0.85" transform="rotate(45)"/>
+        <ellipse rx="5" ry="14" fill="#C9A24B" opacity="0.8" transform="rotate(90)"/>
+        <ellipse rx="5" ry="14" fill="#C9A24B" opacity="0.85" transform="rotate(135)"/>
+        <ellipse rx="5" ry="14" fill="#D9BC74" opacity="0.75" transform="rotate(22.5)"/>
+        <ellipse rx="5" ry="14" fill="#D9BC74" opacity="0.75" transform="rotate(67.5)"/>
+        <ellipse rx="5" ry="14" fill="#D9BC74" opacity="0.75" transform="rotate(112.5)"/>
+        <ellipse rx="5" ry="14" fill="#D9BC74" opacity="0.75" transform="rotate(157.5)"/>
+      </g>
+    </svg>
+    <h1>Leadership Coaching &<br>Continuous Improvement</h1>
+    <p class="hero-where">Where</p>
+    <p class="hero-sub">Strong Leaders Build and Lead Coherent Systems with Strong Student Outcomes</p>
+    <a href="#contact" class="hero-btn">Partner with Us</a>
+  </div>
+</section>
+
+<!-- BELIEF -->
+<section class="belief" id="belief">
+  <div class="container">
+    <span class="section-label">Our Belief</span>
+    <h2 class="section-title">Why Hacer Bien?</h2>
+    <div class="belief-grid">
+      <div class="belief-quote">
+        "Organizations improve when leaders improve. People are rarely the problem. Systems often are."
+      </div>
+      <div class="belief-text">
+        <p>Hacer Bien was created to help leaders build the skills, habits, and systems necessary to sustain success. Our work is grounded in the belief that leadership is not about position or authority.</p>
+        <p>Leadership is about creating the conditions in which people can thrive, teams can collaborate, and organizations can continuously improve.</p>
+        <p>Through leadership coaching, organizational development, strategic planning, and continuous improvement support, we partner with leaders to build coherent systems that produce strong outcomes for students, staff, families, and communities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <span class="section-label">What We Do</span>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-intro">We partner with leaders at every level to strengthen the systems that drive lasting improvement.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Leadership Coaching</h3>
+        <p>Individual coaching, virtual meetings, and site visits designed to strengthen leadership capacity through reflection, feedback, and continuous growth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3>Organizational Development</h3>
+        <p>Strategic alignment, culture building, and systems design that create coherence between vision, priorities, people, and practice.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Continuous Improvement</h3>
+        <p>Evidence-based improvement cycles using the Plan–Do–Study–Act framework to drive sustainable growth and accountability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="container">
+    <span class="section-label">Our Process</span>
+    <h2 class="section-title">The Continuous Improvement Cycle</h2>
+    <p class="section-intro">Every engagement follows the same disciplined cycle. Improvement is not an event — it is a way of operating.</p>
+    <div class="pdsa-cycle">
+      <div class="pdsa-step">
+        <div class="pdsa-step-num">P</div>
+        <h3>Plan</h3>
+        <p>Establish goals and priorities. Align resources to a clear vision and identify evidence sources.</p>
+        <span class="pdsa-arrow">→</span>
+      </div>
+      <div class="pdsa-step">
+        <div class="pdsa-step-num">D</div>
+        <h3>Do</h3>
+        <p>Implement strategies and actions. Observe, collect evidence, and provide targeted feedback.</p>
+        <span class="pdsa-arrow">→</span>
+      </div>
+      <div class="pdsa-step">
+        <div class="pdsa-step-num">S</div>
+        <h3>Study</h3>
+        <p>Examine evidence and outcomes. Reflect on what worked, what needs adjustment, and why.</p>
+        <span class="pdsa-arrow">→</span>
+      </div>
+      <div class="pdsa-step">
+        <div class="pdsa-step-num">A</div>
+        <h3>Act</h3>
+        <p>Adjust practices and systems. Refine, scale, and begin the next cycle of improvement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section id="outcomes">
+  <div class="container">
+    <span class="section-label">Expected Results</span>
+    <h2 class="section-title">What Stronger Leadership Produces</h2>
+    <p class="section-intro">Organizations that invest in leadership coaching see measurable growth across every level.</p>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">Leadership</div>
+        <h3>Confident, Effective Leaders</h3>
+        <p>Clearer communication, stronger decision-making, and feedback that drives real growth.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">Organization</div>
+        <h3>Coherent Systems</h3>
+        <p>Daily actions aligned to mission and vision, with stronger collaboration across teams.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">Workforce</div>
+        <h3>Engaged Teams</h3>
+        <p>Greater role clarity, improved morale, stronger retention of high-performing staff.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">Students</div>
+        <h3>Improved Outcomes</h3>
+        <p>Better instruction, stronger engagement, and more effective implementation of initiatives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <span class="section-label">Let's Talk</span>
+    <h2 class="section-title">Ready to Strengthen Your Leadership?</h2>
+    <p class="section-intro">Because when leadership improves, organizations improve. And when organizations improve, people thrive.</p>
+    <a href="mailto:info@hacerbien.com" class="contact-btn">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Hacer Bien. All rights reserved.</p>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
